@@ -45,3 +45,5 @@ class ANN:
 
 a = ANN([4, 3, 2])
 a.pretty_print()
+#print(a.input_layer)
+#print(a.output_layer)
