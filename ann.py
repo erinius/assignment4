@@ -18,6 +18,8 @@ class Node:
         print(f"{indent}{self.name} is connected to ")
         for i in range(len(self.children)):
                 self.children[i].pretty_print(layer + 1)
+                if i < len(self.weights):
+                    print(f"{indent} with weight {self.weights[i]} ")
         return
 
 class ANN:
@@ -43,7 +45,19 @@ class ANN:
             self.input_layer[i].pretty_print(0)
         return
 
+    def set_random_weights(self):
+        current_layer = self.input_layer
+        while len(current_layer) > 0:
+            for i in range(len(current_layer)):
+                for j in range(len(current_layer[i].children)):
+                    current_layer[i].weights.append(random.uniform(0, 1))
+            current_layer = current_layer[0].children
+        return
+    
 a = ANN([4, 3, 2])
 a.pretty_print()
 #print(a.input_layer)
 #print(a.output_layer)
+print("\nAdding random weights\n")
+a.set_random_weights()
+a.pretty_print()
